@@ -51,7 +51,7 @@ class Articles extends CI_Controller{
 		$article = $this->Article->getArticleById($id);
 		$viewData = array();
 		$viewData['article'] = $article;
-		$this->load->view('hi', $viewData);
+		$this->load->view('show', $viewData);
 	}
 
 }
