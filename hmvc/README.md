@@ -2,7 +2,7 @@
 
 ### How to install ###
 
-* Copy the extensions core files into application/core/ ```MY_Router.php``` ```MY_Loader.php```.
+* Copy the extensions core files into ```application/core/``` ```MY_Router.php``` ```MY_Loader.php```.
 * Create a folder inside the application folder and name it for example ```application/modules/``` ( It could be any name ).
 * Add the HMVC path(s) to your ```config.php``` file:
 
