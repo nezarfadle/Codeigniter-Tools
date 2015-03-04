@@ -1,4 +1,4 @@
-# Codeigniter - HMVC #
+# Codeigniter 3 - HMVC #
 
 ### How to install ###
 
