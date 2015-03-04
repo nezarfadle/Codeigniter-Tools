@@ -40,29 +40,56 @@ class MY_Router extends CI_Router{
 
 		if(is_array($hmvc_paths)){
 			foreach($hmvc_paths as $path){
-				// echo APPPATH . $path . $this->class . '/controllers/' . $this->class. '.php' . '<br>';
-
 				if(file_exists(APPPATH  . $path . $this->class . '/controllers/' . $this->class. '.php')){
-					// $this->directory = "../modules/posts/controllers/";
 					$this->directory = '../' . $path. $this->class . '/controllers/' ;
 					break;
 				}
 			}
 		}
 
-		if (isset($segments[1]))
-		{
-			$this->set_method($segments[1]);
-		}
-		else
-		{
-			$segments[1] = 'index';
+		$isFoundController = false;
+
+		if(count($segments) > 1){
+			
+			foreach($hmvc_paths as $path){
+				
+				if(file_exists(APPPATH  . $path . $this->class . '/controllers/' . $segments[1]. '.php')){
+					
+					$this->directory = '../' . $path. $this->class . '/controllers/' ;
+					$this->set_class($segments[1]);
+					
+					if (isset($segments[2])){
+						$this->set_method($segments[2]);
+					}else{
+						$segments[2] = 'index';
+					}
+
+					array_unshift($segments, NULL);
+					unset($segments[0]);
+					unset($segments[1]);
+					$this->uri->rsegments = $segments;
+					$isFoundController = true;
+					break;
+				}
+			}
 		}
 
-		array_unshift($segments, NULL);
-		unset($segments[0]);
+		if(!$isFoundController){
+
+			if (isset($segments[1])){
+				$this->set_method($segments[1]);
+			}
+			else{
+				$segments[1] = 'index';
+			}
+			array_unshift($segments, NULL);
+			unset($segments[0]);
+			$this->uri->rsegments = $segments;
+
+		}
 		
-		$this->uri->rsegments = $segments;
+
+		
 	}
 
 
