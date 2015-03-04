@@ -37,7 +37,7 @@ application/articles/views/show.php
 
 #### Controller ####
 ```php
-//File: Articles.php
+//File: application/articles/controllers/Articles.php
 <?php
 
 class Articles extends CI_Controller{
@@ -58,7 +58,7 @@ class Articles extends CI_Controller{
 ```
 #### Model ####
 ```php
-//File: Article.php
+//File: application/articles/models/Article.php
 <?php
 
 class Article extends CI_Model{
@@ -70,6 +70,7 @@ class Article extends CI_Model{
 ```
 #### View ####
 ```php
+//File: application/articles/views/show.php
 <h1>List Articles</h1>
 <?php echo $article; ?>
 
