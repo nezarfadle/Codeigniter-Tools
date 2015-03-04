@@ -5,16 +5,10 @@ class MY_Router extends CI_Router{
 
 	function __construct(){
 		parent::__construct();
-		// $this->directory = "..\\modules\\posts\\controllers\\";
-		// $this->directory = "../modules/posts/controllers/";
-
 	}
-		
-	
 
 	protected function _set_request($segments = array())
 	{
-		
 		
 		$segments = $this->_validate_request($segments);
 		// If we don't have any segments left - try the default controller;
@@ -88,9 +82,6 @@ class MY_Router extends CI_Router{
 
 		}
 		
-
-		
 	}
-
 
 }
