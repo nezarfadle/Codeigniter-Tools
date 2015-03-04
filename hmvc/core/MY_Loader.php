@@ -2,6 +2,11 @@
 
 class MY_Loader extends CI_Loader{
 
+	function __construct(){
+		parent::__construct();
+	}
+
+	
 	public function model($model, $name = '', $db_conn = FALSE)
 	{
 		// save the user's model path 
@@ -114,6 +119,59 @@ class MY_Loader extends CI_Loader{
 
 		// couldn't find the model
 		show_error('Unable to locate the model you have specified: '.$model);
+	}
+
+	// -----------------------------------------------------------------------
+	/**
+	 * View Loader
+	 *
+	 * Loads "view" files.
+	 *
+	 * @param	string	$view	View name
+	 * @param	array	$vars	An associative array of data
+	 *				to be extracted for use in the view
+	 * @param	bool	$return	Whether to return the view output
+	 *				or leave it to the Output class
+	 * @return	object|string
+	 */
+	public function view($view, $vars = array(), $return = FALSE)
+	{
+		
+		$userViewName = explode("/", $view);
+		$ci = get_instance(); // CI_Loader instance
+		$hmvc_paths = $ci->config->item('hmvc_paths');
+
+		$tempControllerName = '';
+		$tempViewName = '';
+
+		if(count($userViewName) > 1){
+			$tempControllerName = $userViewName[0];
+			array_shift($userViewName);
+			$tempViewName = implode('/', $userViewName);
+			unset($userViewName);
+		}
+		
+
+		foreach($hmvc_paths as $path){
+
+			if(file_exists(APPPATH.$path.$ci->router->class.'/views/'.$view.'.php')){
+				$this->_ci_view_paths[APPPATH.$path.$ci->router->class.'/views/'] = true;
+				break;	
+			}
+
+			if($tempControllerName != ''){
+
+				if(file_exists(APPPATH.$path.$tempControllerName.'/'.$tempViewName.'.php')){
+					$this->_ci_view_paths[APPPATH.$path.$tempControllerName .'/'] = true;
+					$view = $tempViewName;
+					break;	
+				}
+
+			}
+
+		}
+		
+		return $this->_ci_load(array('_ci_view' => $view, '_ci_vars' => $this->_ci_object_to_array($vars), '_ci_return' => $return));
 	}
 
 
