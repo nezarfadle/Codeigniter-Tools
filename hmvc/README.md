@@ -21,17 +21,17 @@ $config['hmvc_paths'] = array(
 ```
 * In the ```application/modules``` folder create a module directory structure
 ```
-application/articles/
-application/articles/controllers/
-application/articles/models/
-application/articles/views/
+application/modules/articles/
+application/modules/articles/controllers/
+application/modules/articles/models/
+application/modules/articles/views/
 ```
 * Create the needed files:
 
 ```
-application/articles/controllers/Articles.php
-application/articles/models/Article.php
-application/articles/views/show.php
+application/modules/articles/controllers/Articles.php
+application/modules/articles/models/Article.php
+application/modules/articles/views/show.php
 ```
 * Example:
 
